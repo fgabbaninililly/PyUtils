@@ -60,30 +60,3 @@ def s3_read_alarms(bucket, alms_esign_key, alms_noesign_key, qry, tbl_flds, quot
     df.reset_index(drop = True, inplace = True)
     
     return df
-
-
-'''
-#select records using pandas
-start = time.time()
-df_noesign = pd.read_csv('s3://{}/{}'.format(bucket, key))
-#df_noesign[df_noesign['USRFULLNAME'] == "Simone Grasso"]
-df_noesign_filt = df_noesign[(df_noesign['TIMESTAMP_IN'] >= '2018-09-01 02:26:09') & (df_noesign['TIMESTAMP_IN'] <= '2018-09-01 02:27:56')]
-end = time.time()
-print('Read filtered data in {0:.2f} seconds'.format(end - start))
-
-def read_chunks(file_path, chunksize = 100000):
-    chunks = []
-    print("Reading {} in chunks of size {}".format(file_path, chunksize))
-    nchunk = 0
-    for chunk in pd.read_csv(file_path, chunksize = chunksize):
-        chunks.append(chunk)
-        if ((nchunk % 20) == 0):
-            print(".")
-        else:
-            print(".", end='')
-        nchunk = nchunk + 1
-    
-    df = pd.concat([chunk for chunk in chunks])
-    return df
-
-'''
